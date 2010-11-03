@@ -65,6 +65,10 @@
 #define AID_INET          3003  /* can create AF_INET and AF_INET6 sockets */
 #define AID_NET_RAW       3004  /* can create raw INET sockets */
 #define AID_NET_ADMIN     3005  /* can configure interfaces and routing tables. */
+#define AID_MOT_ACCY      9000  /* motorola: accessory */
+#define AID_MOT_PWRIC     9001  /* motorola: power IC */
+#define AID_MOT_USB       9002  /* motorola: usb */
+#define AID_MOT_TCMD      9003  /* motorola: tcmd */
 
 #define AID_MISC          9998  /* access to misc storage */
 #define AID_NOBODY        9999
@@ -107,6 +111,10 @@ static struct android_id_info android_ids[] = {
     { "net_raw",   AID_NET_RAW, },
     { "net_admin", AID_NET_ADMIN, },
     { "misc",      AID_MISC, },
+    { "mot_accy",  AID_MOT_ACCY, },
+    { "mot_pwric", AID_MOT_PWRIC, },
+    { "mot_usb",   AID_MOT_USB, },
+    { "mot_tcmd",  AID_MOT_TCMD, },
     { "nobody",    AID_NOBODY, },
     { "wimax",     AID_WIMAX, },
 };
