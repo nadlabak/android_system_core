@@ -188,7 +188,6 @@ static struct fs_path_config android_files[] = {
     { 00644, AID_APP,       AID_APP,       "data/data/*" },
     { 04755, AID_ROOT,      AID_SYSTEM,    "system/bin/pppd" },
         /* the following three files are INTENTIONALLY set-gid and not set-uid.
->>>>>>> upstream/gingerbread
          * Do not change. */
     { 02755, AID_ROOT,      AID_NET_RAW,   "system/bin/ping" },
     { 02750, AID_ROOT,      AID_INET,      "system/bin/netcfg" },
