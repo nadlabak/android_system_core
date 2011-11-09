@@ -88,6 +88,8 @@ static time_t process_needs_restart;
 
 static const char *ENV[32];
 
+static unsigned emmc_boot = 0;
+
 /* add_environment - add "key=value" to the current environment */
 int add_environment(const char *key, const char *val)
 {
@@ -419,6 +421,10 @@ static void import_kernel_nv(char *name, int in_qemu)
             strlcpy(bootloader, value, sizeof(bootloader));
         } else if (!strcmp(name,"androidboot.hardware")) {
             strlcpy(hardware, value, sizeof(hardware));
+        } else if (!strcmp(name, "androidboot.emmc")) {
+            if (!strcmp(value, "true")) {
+                emmc_boot =1;
+            }
         }
     } else {
         /* in the emulator, export any kernel option with the
@@ -595,10 +601,10 @@ static int set_init_properties_action(int nargs, char **args)
     property_set("ro.baseband", baseband[0] ? baseband : "unknown");
     property_set("ro.carrier", carrier[0] ? carrier : "unknown");
     property_set("ro.bootloader", bootloader[0] ? bootloader : "unknown");
-
     property_set("ro.hardware", hardware);
     snprintf(tmp, PROP_VALUE_MAX, "%d", revision);
     property_set("ro.revision", tmp);
+    property_set("ro.emmc", emmc_boot ? "1" : "0");
     return 0;
 }
 
@@ -715,6 +721,11 @@ int main(int argc, char **argv)
         init_parse_config_file(tmp);
      }
 
+    /* Check for a target specific initialization file and read if present */
+    if (access("/init.target.rc", R_OK) == 0) {
+        INFO("Reading target specific config file");
+            init_parse_config_file("/init.target.rc");
+    }
 
     action_for_each_trigger("early-init", action_add_queue_tail);
 
