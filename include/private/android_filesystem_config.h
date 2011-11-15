@@ -138,10 +138,6 @@ static const struct android_id_info android_ids[] = {
     { "mot_secclkd",  AID_MOT_SECCLKD, },
 #endif
     { "misc",      AID_MISC, },
-    { "mot_accy",  AID_MOT_ACCY, },
-    { "mot_pwric", AID_MOT_PWRIC, },
-    { "mot_usb",   AID_MOT_USB, },
-    { "mot_tcmd",  AID_MOT_TCMD, },
     { "nobody",    AID_NOBODY, },
 };
 
