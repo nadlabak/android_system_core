@@ -83,6 +83,13 @@
 #define AID_MOT_SECCLKD   9008  /* mot_secclkd */
 #endif // MOTOROLA_UIDS
 
+#if defined(MILESTONE_UIDS)
+#define AID_MOT_ACCY      9000  /* access to accessory */
+#define AID_MOT_PWRIC     9001  /* power IC */
+#define AID_MOT_USB       9002  /* mot usb */
+#define AID_MOT_TCMD      9003  /* mot_tcmd */
+#endif // MILESTONE_UIDS
+
 #define AID_MISC          9998  /* access to misc storage */
 #define AID_NOBODY        9999
 
@@ -127,15 +134,21 @@ static const struct android_id_info android_ids[] = {
     { "net_raw",   AID_NET_RAW, },
     { "net_admin", AID_NET_ADMIN, },
 #if defined(MOTOROLA_UIDS)
+     { "mot_accy",  AID_MOT_ACCY, },
+     { "mot_pwric", AID_MOT_PWRIC, },
+     { "mot_usb",   AID_MOT_USB, },
+     { "mot_drm",   AID_MOT_DRM, },
+     { "mot_tcmd",  AID_MOT_TCMD, },
+     { "mot_sec_rtc",  AID_MOT_SEC_RTC, },
+     { "mot_tombstone", AID_MOT_TOMBSTONE, },
+     { "mot_tpapi",  AID_MOT_TPAPI, },
+     { "mot_secclkd",  AID_MOT_SECCLKD, },
+#endif
+#if defined(MILESTONE_UIDS)
     { "mot_accy",  AID_MOT_ACCY, },
     { "mot_pwric", AID_MOT_PWRIC, },
     { "mot_usb",   AID_MOT_USB, },
-    { "mot_drm",   AID_MOT_DRM, },
     { "mot_tcmd",  AID_MOT_TCMD, },
-    { "mot_sec_rtc",  AID_MOT_SEC_RTC, },
-    { "mot_tombstone", AID_MOT_TOMBSTONE, },
-    { "mot_tpapi",  AID_MOT_TPAPI, },
-    { "mot_secclkd",  AID_MOT_SECCLKD, },
 #endif
     { "misc",      AID_MISC, },
     { "nobody",    AID_NOBODY, },
@@ -175,6 +188,7 @@ static struct fs_path_config android_dirs[] = {
     { 00755, AID_ROOT,   AID_ROOT,   "system/etc/ppp" },
     { 00777, AID_ROOT,   AID_ROOT,   "sdcard" },
     { 00771, AID_SYSTEM, AID_SYSTEM, "sd-ext" },
+    { 00770, AID_RADIO,  AID_LOG,    "data/logger" },
     { 00755, AID_ROOT,   AID_ROOT,   0 },
 };
 
@@ -204,6 +218,8 @@ static struct fs_path_config android_files[] = {
     { 00644, AID_SYSTEM,    AID_SYSTEM,    "data/app-private/*" },
     { 00644, AID_APP,       AID_APP,       "data/data/*" },
     { 04755, AID_ROOT,      AID_SYSTEM,    "system/bin/pppd" },
+    { 00660, AID_RADIO,     AID_RADIO,     "data/logger/bplogd.clog" },
+    { 00660, AID_RADIO,     AID_RADIO,     "data/logger/bplogd.conf" },
         /* the following three files are INTENTIONALLY set-gid and not set-uid.
          * Do not change. */
     { 02755, AID_ROOT,      AID_NET_RAW,   "system/bin/ping" },
@@ -222,6 +238,7 @@ static struct fs_path_config android_files[] = {
     { 06750, AID_ROOT,      AID_SHELL,     "system/bin/run-as" },
     { 06755, AID_ROOT,      AID_ROOT,      "system/xbin/hcitool" },
     { 00755, AID_ROOT,      AID_SHELL,     "system/bin/*" },
+    { 00555, AID_ROOT,      AID_ROOT,      "system/bin/brcm_guci_drv" },
     { 00755, AID_ROOT,      AID_SHELL,     "system/xbin/*" },
     { 00755, AID_ROOT,      AID_SHELL,     "system/vendor/bin/*" },
     { 00750, AID_ROOT,      AID_SHELL,     "sbin/*" },
