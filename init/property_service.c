@@ -172,9 +172,9 @@ out:
 
 #else
 
-#define PA_COUNT_MAX  247
-#define PA_INFO_START 1024
-#define PA_SIZE       32768
+#define PA_COUNT_MAX  311
+#define PA_INFO_START 1280
+#define PA_SIZE       45056
 
 #endif
 
