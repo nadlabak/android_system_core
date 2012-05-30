@@ -781,7 +781,7 @@ int main(int argc, char **argv)
     if (charging_mode_booting() || strcmp(bootmode, "charger") == 0 || strcmp(battchg_pause, BOARD_CHARGING_CMDLINE_VALUE) == 0)
         charging_mode = 1;
 
-    if (!charging_mode) {
+    if (!charging_mode_booting()) {
          snprintf(tmp, sizeof(tmp), "/init.%s.rc", hardware);
          init_parse_config_file(tmp);
 
@@ -810,7 +810,7 @@ int main(int argc, char **argv)
     action_for_each_trigger("init", action_add_queue_tail);
 
     /* skip mounting filesystems in charger mode */
-    if (!charging_mode) {
+    if (!charging_mode_booting() && strcmp(bootmode, "charger") != 0) {
         action_for_each_trigger("early-fs", action_add_queue_tail);
         if (emmc_boot) {
             action_for_each_trigger("emmc-fs", action_add_queue_tail);
@@ -833,7 +833,7 @@ int main(int argc, char **argv)
     }
 
         /* run all property triggers based on current state of the properties */
-    queue_builtin_action(queue_property_triggers_action, "queue_propety_triggers");
+    queue_builtin_action(queue_property_triggers_action, "queue_property_triggers");
 
 
 #if BOOTCHART
